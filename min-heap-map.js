@@ -5,13 +5,13 @@ module.exports = class MinHeapMap {
   }
 
   // O(log(n))
-  insert(value) {
+  insert(edge) { // ex. {vertex: 'A', distance: '5'}
     // Add the value to the end
-    this.heap.push(value);
+    this.heap.push(edge);
     let index = this.heap.length - 1;
     let parentIndex = Math.floor(index/2);
-    // If the new value is smaller than its parent, swap
-    while (this.heap[index] < this.heap[parentIndex]) {
+    // If the new distance is smaller than its parent, swap
+    while (this.heap[index].distance < this.heap[parentIndex].distance) {
       let parentValue = this.heap[parentIndex];
       // Swap parent and new value
       this.heap[parentIndex] = value;
