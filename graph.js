@@ -1,3 +1,5 @@
+const PriorityQueue = require('./priority-queue.js');
+
 module.exports = class Graph {
   constructor() {
     this.vertices = {};
