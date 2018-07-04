@@ -1,13 +1,6 @@
 var args = process.argv.slice(2);
 
-class Graph {
-  vertices;
+const Graph = require('./graph.js');
 
-  constructor() {
-    this.vertices = {};
-  }
-
-  addVertex(name, edges) {
-    this.vertices[name] = edges;
-  }
-}
+var g = new Graph();
+g.addVertex('A', {'B': 3});
