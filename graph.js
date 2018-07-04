@@ -1,4 +1,4 @@
-const PriorityQueue = require('./priority-queue.js');
+const MinHeapMap = require('./min-heap-map');
 
 module.exports = class Graph {
   constructor() {
