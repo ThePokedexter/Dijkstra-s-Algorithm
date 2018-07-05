@@ -9,7 +9,7 @@ describe('MinHeapMap', function() {
     minHeapMap = new MinHeapMap(); 
   });
 
-  describe('insert()', function() {
+  describe('insert', function() {
     it('should insert a vertex', function() {
       minHeapMap.insert('A', 5);
       expect(minHeapMap.heap).to.be.eql([{vertex: 'A', distance: 5}]);
@@ -32,7 +32,7 @@ describe('MinHeapMap', function() {
     });
   });
   
-  describe('swap()', function() {
+  describe('swap', function() {
     beforeEach(function() {
       minHeapMap.insert('A', 5);
       minHeapMap.insert('B', 2);
@@ -64,7 +64,7 @@ describe('MinHeapMap', function() {
     });
   });
   
-  describe('getLeftChildIndex()', function() {
+  describe('getLeftChildIndex', function() {
     it('should return index*2 + 1', function() {
       expect(minHeapMap.getLeftChildIndex(0)).to.be.equal(1);
       expect(minHeapMap.getLeftChildIndex(2)).to.be.equal(5);
@@ -72,7 +72,7 @@ describe('MinHeapMap', function() {
     });
   });
   
-  describe('getRightChildIndex()', function() {
+  describe('getRightChildIndex', function() {
     it('should return index*2 + 2', function() {
       expect(minHeapMap.getRightChildIndex(0)).to.be.equal(2);
       expect(minHeapMap.getRightChildIndex(2)).to.be.equal(6);
@@ -80,7 +80,7 @@ describe('MinHeapMap', function() {
     });
   });
 
-  describe('getParentIndex()', function() {
+  describe('getParentIndex', function() {
     it('should return index*2 + 2', function() {
       expect(minHeapMap.getParentIndex(0)).to.be.equal(0);
       expect(minHeapMap.getParentIndex(2)).to.be.equal(1);
@@ -89,7 +89,7 @@ describe('MinHeapMap', function() {
     });
   });
 
-  describe('heapify()', function() {
+  describe('heapify', function() {
     it('should rearrange the array into a min heap', function() {
       let nonMinHeapArray = [
         {name: 'E', distance: 5}, 
@@ -133,4 +133,23 @@ describe('MinHeapMap', function() {
     });
   });
 
+  describe('removeMin', function() {
+    beforeEach(function() {
+      minHeapMap.insert('A', 5);
+      minHeapMap.insert('B', 2);
+      minHeapMap.insert('C', 10);
+      minHeapMap.insert('D', 2);
+      minHeapMap.insert('E', 1);
+    });
+
+    it('should remove the root and heapify', function() {
+      minHeapMap.removeMin();
+      expect(minHeapMap.heap).to.be.eql([
+        {vertex: 'B', distance: 2},
+        {vertex: 'A', distance: 5},
+        {vertex: 'D', distance: 2},
+        {vertex: 'C', distance: 10}
+      ]);
+    });
+  });
 });
