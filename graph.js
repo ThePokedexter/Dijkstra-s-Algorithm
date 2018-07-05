@@ -12,13 +12,13 @@ module.exports = class Graph {
     this.vertices[start] = {...this.vertices[start], [end]: distance}; //ex. ('A', {'B': 1})
   }
 
-  shortestPath(start, finish) {
+  shortestPath(start, end) {
     // stores the vertex and shortest distance from start
     let distances = {}; // ex. {'A': 0, 'B': 2}
     // stores the parent of every vertex in shortest distance
     let parents = {}; // ex. {'A': null, 'B': 'A'}
-    // unvisted vertex and their distances, initialize to Inifinity
-    let unvisited = {}; // ex. {'A': Inifinity, 'B': Inifinity}
+    // unvisited vertex and their distances, initialize to MAX INT
+    let unvisited = {}; // ex. {'A': 0, 'B': MAX_INT}
 
     for (let vertex of Object.keys(this.vertices)) {
       if (vertex === start) {
@@ -50,7 +50,21 @@ module.exports = class Graph {
         }
       }
     }
-    return distances[finish];
+    return distances[end];
+  }
+
+  lengthOfPath(path) { // ex. 'ABC'
+    let result = 0;
+    for (let i=0; i<path.length-1; i++) {
+      let children = this.vertices[path[i]];
+      let nextDistance = children[path[i+1]];
+      if (nextDistance === undefined) {
+        return 'NO SUCH ROUTE';
+      } else {
+        result += nextDistance;
+      }
+    }
+    return result;
   }
 
   getMinUnvisted(unvisited) {
@@ -60,5 +74,29 @@ module.exports = class Graph {
       }
       return minKey;
     })
+  }
+
+  numPaths(start, end, numStops) {
+    if (numStops === 0) {
+      if (start === end) {
+        return 1; // Found one path
+      } else {
+        return 0; // No path here
+      }
+    }
+    let totalPaths = 0;
+    let children = this.vertices[start];
+    for (let child of Object.keys(children)) {
+      totalPaths += this.numPaths(child, end, numStops - 1);
+    }
+    return totalPaths;
+  }
+
+  numPathsMaxStops(start, end, maxStops) {
+    let result = 0;
+    for (let i=1; i<=maxStops; i++) {
+      result += this.numPaths(start, end, i);
+    }
+    return result;
   }
 }
