@@ -44,31 +44,39 @@ module.exports = class MinHeapMap {
 
   heapify() {
     let index = 0;
-    let leftChildIndex = this.getLeftChildIndex(index);
-    let rightChildIndex = this.getRightChildIndex(index);
+    let size = this.heap.length;
+  
+    while (index < size) {
+      let leftChildIndex = this.getLeftChildIndex(index);
+      let rightChildIndex = this.getRightChildIndex(index);
+      let toSwapIndex = index;
 
-    // What if right or left child doesn't exist?
-    while (
-      this.heap[index].distance < this.heap[leftChildIndex].distance ||
-      this.heap[index].distance < this.heap[rightChildIndex].distance
-    ) {
-      let indexValue = this.heap[index];
-      // left child is larger
-      if (this.heap[leftChildIndex].distance > this.heap[rightChildIndex].distance) {
-        // Swap index with left child
-        this.heap[index] = this.heap[leftChildIndex];
-        this.heap[leftChildIndex] = indexValue;
-        index = leftChildIndex;
-        leftChildIndex = this.getLeftChildIndex(index);
-        rightChildIndex = this.getRightChildIndex(index);
-      } else { // right child is larger
-        this.heap[index] = this.heap[rightChildIndex];
-        this.heap[rightChildIndex] = indexValue;
-        index = rightChildIndex;
-        leftChildIndex = this.getLeftChildIndex(index);
-        rightChildIndex = this.getRightChildIndex(index);
+      // If the left child is smaller than the root
+      if (leftChildIndex < size && this.heap[leftChildIndex] < this.heap[index]) {
+        toSwapIndex = leftChildIndex;
       }
+
+      // If the right child is smaller than the root
+      if (rightChildIndex < size && this.heap[rightChildIndex] < this.heap[index]) {
+        toSwapIndex = rightChildIndex
+      }
+
+      // Root is smaller than left and right child
+      if (toSwapIndex === index) {
+        return;
+      }
+
+      swap(index, toSwapIndex);
+
+      index = toSwapIndex;
     }
+  }
+
+  swap(index1, index2) {
+    let temp = this.heap[index1];
+
+    this.heap[index1] = this.heap[index2];
+    this.heap[index2] = temp;
   }
 
   getLeftChildIndex(index) {
