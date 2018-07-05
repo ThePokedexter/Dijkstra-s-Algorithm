@@ -15,16 +15,47 @@ module.exports = class Graph {
     // stores the parent of every vertex in shortest distance
     let parents = {}; // ex. {'A': null, 'B': 'A'}
     // unvisted vertex and their distances, initialize to Inifinity
-    let unvisted = {}; // ex. {'A': Inifinity, 'B': Inifinity}
+    let unvisited = {}; // ex. {'A': Inifinity, 'B': Inifinity}
 
-    for (vertex of this.vertices) {
+    for (let vertex of Object.keys(this.vertices)) {
       if (vertex === start) {
         distances[vertex] = 0;
         parents[vertex] = null;
+        unvisited[vertex] = 0;
       } else {
-        // Initialize distances to Inifinity
-        distances[vertex] = Infinity;
+        // Initialize distances to Max Number
+        unvisited[vertex] = Number.MAX_SAFE_INTEGER;
       }
     }
+
+    while (Object.keys(unvisited).length > 0) {
+      // Get the min vertex
+      let currentVertex = this.getMinUnvisted(unvisited);
+      // Delete the min vertex
+      delete unvisited[currentVertex];
+      let distance = distances[currentVertex];
+      // Get the direct connections
+      let children = this.vertices[currentVertex];
+      for (let vertex of Object.keys(children)) {
+        let newDistance = distance + children[vertex];
+        if (distances[vertex] === undefined) {
+          distances[vertex] = newDistance;
+          parents[vertex] = currentVertex;
+        } else if (newDistance < distances[vertex]) {
+          distances[vertex] = newDistance;
+          parents[vertex] = currentVertex;
+        }
+      }
+    }
+    return distances[finish];
+  }
+
+  getMinUnvisted(unvisited) {
+    return Object.keys(unvisited).reduce((minKey, currentKey) => {
+      if (unvisited[currentKey] < unvisited[minKey]) {
+        return currentKey;
+      }
+      return minKey;
+    })
   }
 }

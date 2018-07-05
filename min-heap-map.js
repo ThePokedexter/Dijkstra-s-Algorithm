@@ -76,6 +76,14 @@ module.exports = class MinHeapMap {
     }
   }
 
+  delete(vertex) {
+
+  }
+
+  update(vertex) {
+    
+  }
+
   swap(index1, index2) {
     let temp = this.heap[index1];
 
@@ -93,6 +101,10 @@ module.exports = class MinHeapMap {
 
   getParentIndex(index) {
     return Math.floor(index/2);
+  }
+
+  size() {
+    return this.heap.length;
   }
 }
 
