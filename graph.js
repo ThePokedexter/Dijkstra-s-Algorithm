@@ -99,4 +99,30 @@ module.exports = class Graph {
     }
     return result;
   }
+
+  numPathsMaxDistance(start, end, maxDistance) {
+    return this.numPathsMaxDistanceHelper(start, end, maxDistance, 0, {}, start);
+  }
+
+  numPathsMaxDistanceHelper(start, end, maxDistance, distance, memo, currentPath) {
+    let key = start.toString() + '-' + distance.toString();
+    if (memo[key] !== undefined) {
+      return memo[key];
+    }
+    if (distance >= maxDistance) {
+      return 0;
+    }
+    let totalPaths = 0;
+    if (start === end && distance > 0) {
+      totalPaths = totalPaths + 1;
+    }
+    let children = this.vertices[start];
+    for (let child of Object.keys(children)) {
+      let subtotal = this.numPathsMaxDistanceHelper(child, end, maxDistance, distance + children[child], memo, currentPath + child);
+      totalPaths = totalPaths + subtotal;
+    }
+
+    memo[key] = totalPaths;
+    return totalPaths;
+  }
 }

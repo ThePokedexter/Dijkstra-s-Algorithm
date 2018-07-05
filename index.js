@@ -24,4 +24,4 @@ console.log('6. The number of trips starting at C and ending at C with a maximum
 console.log('7. The number of trips starting at A and ending at C with exactly 4 stops: ' + g.numPaths('A', 'C', 4));
 console.log('8. The length of the shortest route (in terms of distance to travel) from A to C: ' + g.shortestPath('A', 'C'));
 console.log('9. The length of the shortest route (in terms of distance to travel) from B to B: ' + g.shortestPath('B', 'B'));
-console.log('10. ')
+console.log('10. The number of different routes from C to C with a distance of less than 30: ' + g.numPathsMaxDistance('C', 'C', 30));
