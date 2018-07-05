@@ -5,8 +5,11 @@ module.exports = class Graph {
     this.vertices = {};
   }
 
-  addVertex(name, edges) {
-    this.vertices[name] = edges; //ex. ('A', {'B': 1})
+  addVertex(route) { // ex. AB5
+    let start = route[0];
+    let end = route[1];
+    let distance = parseInt(route.substring(2));
+    this.vertices[start] = {...this.vertices[start], [end]: distance}; //ex. ('A', {'B': 1})
   }
 
   shortestPath(start, finish) {
