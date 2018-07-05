@@ -10,7 +10,7 @@ module.exports = class MinHeapMap {
     let edge = {vertex, distance};
     this.heap.push(edge);
     let index = this.heap.length - 1;
-    let parentIndex = Math.floor(index/2);
+    let parentIndex = this.getParentIndex(index);
     // If the new distance is smaller than its parent, swap
     while (this.heap[index].distance < this.heap[parentIndex].distance) {
       this.swap(parentIndex, index);

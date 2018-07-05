@@ -79,4 +79,13 @@ describe('MinHeapMap', function() {
       expect(minHeapMap.getRightChildIndex(8)).to.be.equal(18);
     });
   });
+
+  describe('getParentIndex()', function() {
+    it('should return index*2 + 2', function() {
+      expect(minHeapMap.getParentIndex(0)).to.be.equal(0);
+      expect(minHeapMap.getParentIndex(2)).to.be.equal(1);
+      expect(minHeapMap.getParentIndex(8)).to.be.equal(4);
+      expect(minHeapMap.getParentIndex(3)).to.be.equal(1);
+    });
+  });
 });
