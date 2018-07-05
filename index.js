@@ -23,10 +23,10 @@ console.log('');
 
 console.log(test.heap);
 
-// test.removeMin();
+test.removeMin();
 
-// console.log(test.heap);
+console.log(test.heap);
 
-// test.removeMin();
+test.removeMin();
 
-// console.log(test.heap);
+console.log(test.heap);
