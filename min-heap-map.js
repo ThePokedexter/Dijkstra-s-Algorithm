@@ -22,7 +22,7 @@ module.exports = class MinHeapMap {
   // O(log(n))
   removeMin() {
     if (this.heap.length < 2) {
-      return this.heap.pop();
+      return this.heap.unshift();
     }
     // Min is the first item
     let min = this.heap[0];

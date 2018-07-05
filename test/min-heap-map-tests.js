@@ -134,16 +134,24 @@ describe('MinHeapMap', function() {
   });
 
   describe('removeMin', function() {
-    beforeEach(function() {
+    it('should remove the root', function() {
+      minHeapMap.insert('A', 5);
+      minHeapMap.insert('B', 2);
+
+      expect(minHeapMap.removeMin()).to.be.eql({vertex: 'B', distance: 2});
+      expect(minHeapMap.heap).to.be.eql([
+        {vertex: 'A', distance: 5}
+      ]);
+    })
+
+    it('should remove the root and heapify', function() {
       minHeapMap.insert('A', 5);
       minHeapMap.insert('B', 2);
       minHeapMap.insert('C', 10);
       minHeapMap.insert('D', 2);
       minHeapMap.insert('E', 1);
-    });
-
-    it('should remove the root and heapify', function() {
-      minHeapMap.removeMin();
+      
+      expect(minHeapMap.removeMin()).to.be.eql({vertex: 'E', distance: 1});
       expect(minHeapMap.heap).to.be.eql([
         {vertex: 'B', distance: 2},
         {vertex: 'A', distance: 5},
