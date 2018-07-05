@@ -20,6 +20,7 @@ module.exports = class Graph {
     // unvisited vertex and their distances, initialize to MAX INT
     let unvisited = {}; // ex. {'A': 0, 'B': MAX_INT}
 
+    // Initialize distances, parents and unvisited
     for (let vertex of Object.keys(this.vertices)) {
       if (vertex === start) {
         distances[vertex] = 0;
@@ -39,12 +40,12 @@ module.exports = class Graph {
       let distance = distances[currentVertex];
       // Get the direct connections
       let children = this.vertices[currentVertex];
+
       for (let vertex of Object.keys(children)) {
         let newDistance = distance + children[vertex];
-        if (distances[vertex] === undefined) {
-          distances[vertex] = newDistance;
-          parents[vertex] = currentVertex;
-        } else if (newDistance < distances[vertex]) {
+
+        // If the distances vertex hasn't been set or the new distance is shorter than the stored one
+        if (distances[vertex] === undefined || newDistance < distances[vertex]) {
           distances[vertex] = newDistance;
           parents[vertex] = currentVertex;
         }
@@ -101,10 +102,10 @@ module.exports = class Graph {
   }
 
   numPathsMaxDistance(start, end, maxDistance) {
-    return this.numPathsMaxDistanceHelper(start, end, maxDistance, 0, {}, start);
+    return this.numPathsMaxDistanceHelper(start, end, maxDistance, 0, {});
   }
 
-  numPathsMaxDistanceHelper(start, end, maxDistance, distance, memo, currentPath) {
+  numPathsMaxDistanceHelper(start, end, maxDistance, distance, memo) {
     let key = start.toString() + '-' + distance.toString();
     if (memo[key] !== undefined) {
       return memo[key];
@@ -118,7 +119,7 @@ module.exports = class Graph {
     }
     let children = this.vertices[start];
     for (let child of Object.keys(children)) {
-      let subtotal = this.numPathsMaxDistanceHelper(child, end, maxDistance, distance + children[child], memo, currentPath + child);
+      let subtotal = this.numPathsMaxDistanceHelper(child, end, maxDistance, distance + children[child], memo);
       totalPaths = totalPaths + subtotal;
     }
 

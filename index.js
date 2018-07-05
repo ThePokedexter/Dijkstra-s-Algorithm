@@ -1,7 +1,6 @@
 var args = process.argv.slice(2);
 
 const Graph = require('./graph.js');
-const MinHeapMap = require('./min-heap-map');
 
 var g = new Graph();
 g.addVertex('AB5');
