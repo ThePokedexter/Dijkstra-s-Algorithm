@@ -12,12 +12,9 @@ module.exports = class MinHeapMap {
     let parentIndex = Math.floor(index/2);
     // If the new distance is smaller than its parent, swap
     while (this.heap[index].distance < this.heap[parentIndex].distance) {
-      let parentValue = this.heap[parentIndex];
-      // Swap parent and new value
-      this.heap[parentIndex] = value;
-      this.heap[index] = parent;
+      this.swap(parentIndex, index);
       index = parentIndex;
-      parentIndex = Math.floor(index/2);
+      parentIndex = this.getParentIndex(index);
     }
   }
 
@@ -52,12 +49,18 @@ module.exports = class MinHeapMap {
       let toSwapIndex = index;
 
       // If the left child is smaller than the root
-      if (leftChildIndex < size && this.heap[leftChildIndex] < this.heap[index]) {
-        toSwapIndex = leftChildIndex;
+      if (leftChildIndex < size && this.heap[leftChildIndex].distance < this.heap[index].distance) {
+        // If the right child is smaller than the left child
+        if (rightChildIndex < size && this.heap[rightChildIndex].distance < this.heap[leftChildIndex].distance) {
+          toSwapIndex = rightChildIndex;
+        } else {
+          toSwapIndex = leftChildIndex;
+        }
       }
 
       // If the right child is smaller than the root
-      if (rightChildIndex < size && this.heap[rightChildIndex] < this.heap[index]) {
+      else if (rightChildIndex < size && this.heap[rightChildIndex].distance < this.heap[index].distance) {
+        // Left child can't be smaller than the right child, because left child is larger than root
         toSwapIndex = rightChildIndex
       }
 
@@ -66,7 +69,7 @@ module.exports = class MinHeapMap {
         return;
       }
 
-      swap(index, toSwapIndex);
+      this.swap(index, toSwapIndex);
 
       index = toSwapIndex;
     }
@@ -86,4 +89,9 @@ module.exports = class MinHeapMap {
   getRightChildIndex(index) {
     return index * 2 + 2;
   }
+
+  getParentIndex(index) {
+    return Math.floor(index/2);
+  }
 }
+
