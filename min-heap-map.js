@@ -5,8 +5,9 @@ module.exports = class MinHeapMap {
   }
 
   // O(log(n))
-  insert(edge) { // ex. {vertex: 'A', distance: '5'}
+  insert(vertex, distance) {
     // Add the value to the end
+    let edge = {vertex, distance};
     this.heap.push(edge);
     let index = this.heap.length - 1;
     let parentIndex = Math.floor(index/2);

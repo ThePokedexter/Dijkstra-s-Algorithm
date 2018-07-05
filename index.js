@@ -8,13 +8,13 @@ g.addVertex('A', {'B': 3});
 
 
 var test = new MinHeapMap();
-test.insert({vertex: 'A', distance: '5'});
-test.insert({vertex: 'B', distance: '1'});
-test.insert({vertex: 'C', distance: '2'});
-test.insert({vertex: 'D', distance: '5'});
-test.insert({vertex: 'E', distance: '4'});
-test.insert({vertex: 'F', distance: '7'});
-test.insert({vertex: 'G', distance: '0'});
+test.insert('A', 5);
+test.insert('B', 1);
+test.insert('C', 2);
+test.insert('D', 5);
+test.insert('E', 4);
+test.insert('F', 7);
+test.insert('G', 0);
 
 console.log(test.heap);
 
