@@ -88,4 +88,49 @@ describe('MinHeapMap', function() {
       expect(minHeapMap.getParentIndex(3)).to.be.equal(1);
     });
   });
+
+  describe('heapify()', function() {
+    it('should rearrange the array into a min heap', function() {
+      let nonMinHeapArray = [
+        {name: 'E', distance: 5}, 
+        {name: 'A', distance: 2}, 
+        {name: 'C', distance: 6},
+        {name: 'F', distance: 10},
+        {name: 'G', distance: 16},
+        {name: 'H', distance: 7}
+      ];
+      minHeapMap.heap = nonMinHeapArray;
+      minHeapMap.heapify();
+      expect(minHeapMap.heap).to.be.eql([
+        {name: 'A', distance: 2},
+        {name: 'E', distance: 5},
+        {name: 'C', distance: 6},
+        {name: 'F', distance: 10},
+        {name: 'G', distance: 16},
+        {name: 'H', distance: 7}
+      ]);
+    });
+
+    it('should not rearrange the array because its already a min heap', function() {
+      let minHeapArray = [
+        {name: 'A', distance: 2},
+        {name: 'E', distance: 5},
+        {name: 'C', distance: 6},
+        {name: 'F', distance: 10},
+        {name: 'G', distance: 16},
+        {name: 'H', distance: 7}
+      ];
+      minHeapMap.heap = minHeapArray;
+      minHeapMap.heapify();
+      expect(minHeapMap.heap).to.be.eql([
+        {name: 'A', distance: 2},
+        {name: 'E', distance: 5},
+        {name: 'C', distance: 6},
+        {name: 'F', distance: 10},
+        {name: 'G', distance: 16},
+        {name: 'H', distance: 7}
+      ]);
+    });
+  });
+
 });
