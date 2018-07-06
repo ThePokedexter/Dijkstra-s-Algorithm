@@ -163,4 +163,26 @@ describe('Graph', function() {
     });
   });
 
+  describe('numPathsMaxStops', function() {
+    beforeEach(function() {
+      graph.addVertex('AB5');
+      graph.addVertex('BC4');
+      graph.addVertex('CD8');
+      graph.addVertex('DC8');
+      graph.addVertex('DE6');
+      graph.addVertex('AD5');
+      graph.addVertex('CE2');
+      graph.addVertex('EB3');
+      graph.addVertex('AE7');
+    });
+
+    it('should get the number of possible paths from C to C with a maximum of three stops', function() {
+      expect(graph.numPathsMaxStops('C', 'C', 3)).to.be.equal(2);
+    });
+
+    it('should get the number of possible paths from A to C with a maximum of 4 stops', function() {
+      expect(graph.numPathsMaxStops('A', 'C', 4)).to.be.equal(6);
+    });
+  });
+
 })
