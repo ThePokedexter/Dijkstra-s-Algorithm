@@ -73,6 +73,48 @@ describe('Graph', function() {
     it('should get NO SUCH ROUTE', function() {
       expect(graph.shortestPath('B', 'A')).to.be.equal('NO SUCH ROUTE');
     });
-  })
+  });
+
+  describe('lengthOfPath', function() {
+    beforeEach(function() {
+      graph.addVertex('AB5');
+      graph.addVertex('BC4');
+      graph.addVertex('CD8');
+      graph.addVertex('DC8');
+      graph.addVertex('DE6');
+      graph.addVertex('AD5');
+      graph.addVertex('CE2');
+      graph.addVertex('EB3');
+      graph.addVertex('AE7');
+    });
+
+    it('should get the length of the path with no stops starting at A', function() {
+      expect(graph.lengthOfPath('ABC')).to.be.equal(9);
+    });
+
+    it('should get the length of the path with no stops starting at A', function() {
+      expect(graph.lengthOfPath('AD')).to.be.equal(5);
+    });
+
+    it('should get the length of the path with no stops starting at A', function() {
+      expect(graph.lengthOfPath('ADC')).to.be.equal(13);
+    });
+
+    it('should get the length of the path with no stops starting at A', function() {
+      expect(graph.lengthOfPath('AEBCD')).to.be.equal(22);
+    });
+
+    it('should return a message when the route does not exist', function() {
+      expect(graph.lengthOfPath('AED')).to.be.equal('NO SUCH ROUTE');
+    });
+
+    it('should return a message when the route does not exist', function() {
+      expect(graph.lengthOfPath('DA')).to.be.equal('NO SUCH ROUTE');
+    });
+    
+    it('should get the length of the path with no stops starting at B', function() {
+      expect(graph.lengthOfPath('BCE')).to.be.equal(6);
+    });
+  });
 
 })
