@@ -45,4 +45,34 @@ describe('Graph', function() {
     });
   });
 
+  describe('shortestPath', function() {
+    beforeEach(function() {
+      graph.addVertex('AB5');
+      graph.addVertex('BC4');
+      graph.addVertex('CD8');
+      graph.addVertex('DC8');
+      graph.addVertex('DE6');
+      graph.addVertex('AD5');
+      graph.addVertex('CE2');
+      graph.addVertex('EB3');
+      graph.addVertex('AE7');
+    });
+
+    it('should get the shortest path to a direct child', function() {
+      expect(graph.shortestPath('A', 'B')).to.be.equal(5);
+    });
+
+    it('should get the shortest path', function() {
+      expect(graph.shortestPath('A', 'C')).to.be.equal(9);
+    });
+
+    it('should get the shortest path', function() {
+      expect(graph.shortestPath('B', 'D')).to.be.equal(12);
+    });
+
+    it('should get NO SUCH ROUTE', function() {
+      expect(graph.shortestPath('B', 'A')).to.be.equal('NO SUCH ROUTE');
+    });
+  })
+
 })

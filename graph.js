@@ -48,8 +48,12 @@ module.exports = class Graph {
         if (distances[vertex] === undefined || newDistance < distances[vertex]) {
           distances[vertex] = newDistance;
           parents[vertex] = currentVertex;
+          unvisited[vertex] = newDistance;
         }
       }
+    }
+    if (distances[end] === undefined) {
+      return 'NO SUCH ROUTE';
     }
     return distances[end];
   }
