@@ -1,5 +1,3 @@
-const MinHeapMap = require('./min-heap-map');
-
 module.exports = class Graph {
   constructor() {
     this.vertices = {};

@@ -1,6 +1,9 @@
 const fs = require('fs');
 const Graph = require('./graph');
+const Parser = require('./parser');
+
 const g = new Graph();
+const p = new Parser();
 
 const graphFile = process.argv[2];
 const inputFile = process.argv[3];
