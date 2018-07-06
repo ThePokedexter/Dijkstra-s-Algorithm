@@ -185,4 +185,25 @@ describe('Graph', function() {
     });
   });
 
+  describe('numPathsMaxDistance', function() {
+    beforeEach(function() {
+      graph.addVertex('AB5');
+      graph.addVertex('BC4');
+      graph.addVertex('CD8');
+      graph.addVertex('DC8');
+      graph.addVertex('DE6');
+      graph.addVertex('AD5');
+      graph.addVertex('CE2');
+      graph.addVertex('EB3');
+      graph.addVertex('AE7');
+    });
+
+    it('should get the number of different routes from C to C with a distance less than 30', function() {
+      expect(graph.numPathsMaxDistance('C', 'C', 30)).to.be.equal(7);
+    });
+
+    it('should get the number of different routes from A to C with a distance less than 14', function() {
+      expect(graph.numPathsMaxDistance('A', 'C', '14')).to.be.equal(2);
+    });
+  })
 })
