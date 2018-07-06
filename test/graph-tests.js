@@ -111,9 +111,55 @@ describe('Graph', function() {
     it('should return a message when the route does not exist', function() {
       expect(graph.lengthOfPath('DA')).to.be.equal('NO SUCH ROUTE');
     });
-    
+
     it('should get the length of the path with no stops starting at B', function() {
       expect(graph.lengthOfPath('BCE')).to.be.equal(6);
+    });
+  });
+
+  describe('getMinUnvisted', function() {
+    it('should get the key with the minimum value in the object', function() {
+      let unvistedTest = {
+        A: 5,
+        B: 1,
+        C: 100
+      };
+      expect(graph.getMinUnvisted(unvistedTest)).to.be.equal('B');
+    });
+
+    it('should get the key with the minimum value in the object', function() {
+      let unvistedTest = {
+        A: 900,
+        B: 901,
+        C: 899
+      };
+      expect(graph.getMinUnvisted(unvistedTest)).to.be.equal('C');
+    });
+  });
+
+  describe('numPaths', function() {
+    beforeEach(function() {
+      graph.addVertex('AB5');
+      graph.addVertex('BC4');
+      graph.addVertex('CD8');
+      graph.addVertex('DC8');
+      graph.addVertex('DE6');
+      graph.addVertex('AD5');
+      graph.addVertex('CE2');
+      graph.addVertex('EB3');
+      graph.addVertex('AE7');
+    });
+
+    it('should get the number of possible paths from  A to C with exactly 4 stops', function() {
+      expect(graph.numPaths('A', 'C', 4)).to.be.equal(3);
+    });
+
+    it('should get the number of possible paths from D to E with exactly 2 stops', function() {
+      expect(graph.numPaths('D', 'E', 2)).to.be.equal(1);
+    });
+
+    it('should should return 0 when no path exists', function() {
+      expect(graph.numPaths('D', 'A', 3)).to.be.equal(0);
     });
   });
 
