@@ -47,6 +47,7 @@ module.exports = class Graph {
     for (let vertex of Object.keys(this.vertices)) {
       // Special case if the start is the same as end so we don't return 0
       if (start === end && vertex === start) {
+        // Split start and end into different nodes
         distances[startConstant] = 0;
         parents[startConstant] = null;
         unvisited[startConstant] = 0;
