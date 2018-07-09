@@ -1,3 +1,7 @@
+const startConstant = 'START';
+const endConstant = 'END';
+const noRouteFoundMessage = 'NO SUCH ROUTE';
+
 module.exports = class Graph {
   constructor() {
     this.vertices = {};
@@ -10,6 +14,26 @@ module.exports = class Graph {
     this.vertices[start] = {...this.vertices[start], [end]: distance}; //ex. ('A', {'B': 1})
   }
 
+  copyVertices(start, end) {
+    let copy = JSON.parse(JSON.stringify(this.vertices));
+
+    // If the start and end are the same, we split the vertices into START and GOAL
+    if (start === end) {
+      copy = {...copy, [startConstant]: copy[start]};
+      delete copy[start];
+  
+      for (let fromKey of Object.keys(copy)) {
+        for (let toKey of Object.keys(copy[fromKey])) {
+          if (toKey === start) {
+            copy[fromKey][endConstant] = copy[fromKey][toKey];
+            delete copy[fromKey][toKey];
+          }
+        }
+      }
+    }
+    return copy;
+  }
+
   shortestPath(start, end) {
     // stores the vertex and shortest distance from start
     let distances = {}; // ex. {'A': 0, 'B': 2}
@@ -18,9 +42,18 @@ module.exports = class Graph {
     // unvisited vertex and their distances, initialize to MAX INT
     let unvisited = {}; // ex. {'A': 0, 'B': MAX_INT}
 
+    let vertices = this.copyVertices(start, end);
     // Initialize distances, parents and unvisited
     for (let vertex of Object.keys(this.vertices)) {
-      if (vertex === start) {
+      // Special case if the start is the same as end so we don't return 0
+      if (start === end && vertex === start) {
+        distances[startConstant] = 0;
+        parents[startConstant] = null;
+        unvisited[startConstant] = 0;
+        unvisited[endConstant] = Number.MAX_SAFE_INTEGER;
+        start = startConstant;
+        end = endConstant;
+      } else if (vertex === start) {
         distances[vertex] = 0;
         parents[vertex] = null;
         unvisited[vertex] = 0;
@@ -37,8 +70,10 @@ module.exports = class Graph {
       delete unvisited[currentVertex];
       let distance = distances[currentVertex];
       // Get the direct connections
-      let children = this.vertices[currentVertex];
-
+      let children = vertices[currentVertex];
+      if (currentVertex === endConstant) {
+        children = vertices[startConstant];
+      }
       for (let vertex of Object.keys(children)) {
         let newDistance = distance + children[vertex];
 
@@ -51,7 +86,7 @@ module.exports = class Graph {
       }
     }
     if (distances[end] === undefined) {
-      return 'NO SUCH ROUTE';
+      return noRouteFoundMessage;
     }
     return distances[end];
   }
@@ -62,7 +97,7 @@ module.exports = class Graph {
       let children = this.vertices[path[i]];
       let nextDistance = children[path[i+1]];
       if (nextDistance === undefined) {
-        return 'NO SUCH ROUTE';
+        return noRouteFoundMessage;
       } else {
         result += nextDistance;
       }

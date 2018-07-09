@@ -8,7 +8,7 @@ This project creates a directed graph from graph.txt or a custom file.
 
 The graph file has the format 'AB5' where A is the starting node, B is the ending node and 5 is the distance from A to B. The distances are unidirectional, AB5 does NOT imply that there is a route between B and A. 
 
-The inputs file has human-readable instructions on what to output. Each line is parsed and the output is displayed along with the input in the console. 
+The inputs file has human-readable instructions on what to output. Each line is parsed and the output is displayed along with the input in the console. r
 
 ## Build Setup
 

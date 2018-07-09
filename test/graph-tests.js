@@ -70,6 +70,10 @@ describe('Graph', function() {
       expect(graph.shortestPath('B', 'D')).to.be.equal(12);
     });
 
+    it('should get the shortest path given the same start and end', function() {
+      expect(graph.shortestPath('B', 'B')).to.be.equal(9);
+    });
+
     it('should get NO SUCH ROUTE', function() {
       expect(graph.shortestPath('B', 'A')).to.be.equal('NO SUCH ROUTE');
     });
