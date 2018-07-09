@@ -14,10 +14,11 @@ Please see graph.txt and input.txt for an example of the format the graph and in
 
 ## Run
 
-The following steps assume you already have npm and Node.js installed on your machine. Otherwise, you can download them here: https://nodejs.org/
+The following steps assume you downloaded the project, and already have npm and Node.js installed on your machine. Otherwise, you can download them here: https://nodejs.org/
 
 ``` bash
 # 1. navigate to the root of this project in the terminal
+cd path/to/trains
 
 # 2. install dependencies
 npm install
