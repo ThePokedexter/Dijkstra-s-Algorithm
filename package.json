@@ -1,7 +1,7 @@
 {
-  "name": "dijkstra-s-algorithm",
+  "name": "trains-solution",
   "version": "1.0.0",
-  "description": "A implementation of Dijkstra's algorithm for finding the shortest path between nodes in a graph",
+  "description": "An implementation of finding paths in a weighted directed graph",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -15,9 +15,6 @@
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ThePokedexter/Dijkstra-s-Algorithm/issues"
-  },
   "homepage": "https://github.com/ThePokedexter/Dijkstra-s-Algorithm#readme",
   "devDependencies": {
     "chai": "^4.1.2",
